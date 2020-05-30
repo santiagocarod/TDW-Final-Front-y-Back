@@ -1,0 +1,13 @@
+
+/.idea/
+/vendor/
+.env.*
+/phpunit.xml
+/config/*.pem
+/logs/*.log
+/logs/*.xml
+bin/
+composer.lock
+
+# JIRA plugin
+atlassian-ide-plugin.xml

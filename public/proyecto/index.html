@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Santiago Caro Duque</title>
+    <link rel="icon" href="https://i.ya-webdesign.com/images/white-letter-s-png-3.png">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="static/code.js"></script>
+</head>
+
+<body onload="checkInit();">
+
+    <div id="header" class="container-sm">
+        <h1>
+            <center>Tecnologias & Internet</center>
+        </h1>
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" id="formLogin">
+                    <label for="username">Usuario: </label>
+                    <input type="text" id="username" name="username" placeholder="Usuario" class="form-control"
+                        autofocus />
+                    <label for="password">Contraseña: </label>
+                    <input type="password" id="password" name="password" placeholder="Palabra clave"
+                        class="form-control" />
+                    <br>
+                    <center>
+                        <input type="button" id="login" value="Inciar Sesión" class="btn btn-primary" />
+                    </center>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form method="POST" id="formSignUp" onsubmit="signUp();">
+                    <label for="usernameSU">Usuario: </label>
+                    <input type="text" id="usernameSU" name="username" placeholder="Usuario" class="form-control"
+                        autofocus />
+                    <label for="passwordSU">Contraseña: </label>
+                    <input type="password" id="passwordSU" name="password" placeholder="Palabra clave"
+                        class="form-control" />
+                    <br>
+                    <center>
+                        <input type="submit" id="signup" value="Registrarse" class="btn btn-primary" />
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <center>
+        <div class="container">
+            <div class="row">
+                <div id="peopleColumn" class="col-sm">
+                    <h3>Personas</h3>
+                    <img src="https://image.flaticon.com/icons/svg/1256/1256650.svg" alt="People" height="200">
+                </div>
+                <div id="entitiesColumn" class="col-sm">
+                    <h3>Entidades</h3>
+                    <img src="https://image.flaticon.com/icons/svg/2761/2761095.svg" alt="entities" height="200">
+                </div>
+                <div id="productsColumn" class="col-sm">
+                    <h3>Productos</h3>
+                    <img src="https://image.flaticon.com/icons/svg/2898/2898378.svg" alt="producto" height="200">
+                </div>
+            </div>
+        </div>
+    </center>
+
+
+
+    <script>
+        let authHeader = null;
+        $("#login").click(function () {
+            $.post(
+                "/access_token",
+                $("#formLogin").serialize(),
+                null
+            ).success(function (data, textStatus, request) {
+                // Si es correcto => mostrar productos
+                login(data.id,request.getResponseHeader('Authorization'));
+                
+            }).fail(function () {
+                alert("Incorrecto :(")
+            });
+        });
+    </script>
+    <script>
+        function checkInit() {
+            authHeader = localStorage.getItem("authHeader");
+            if (authHeader != null) {
+                location = "reader.html"
+            }
+            if (window.location.pathname == "/proyecto") {
+                location = "/proyecto/index.html";
+            }
+            if (localStorage.getItem("user") != null){
+                loginRequest();
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

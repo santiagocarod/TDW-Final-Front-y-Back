@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Santiago Caro Duque</title>
+    <link rel="icon" href="https://i.ya-webdesign.com/images/white-letter-s-png-3.png">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/0ef6fc49aa.js"></script>
+    <script src="static/code.js"></script>
+</head>
+
+<body onload="printUser();validate();">
+    <div id="title" class="container-sm">
+        <h1>
+            <center>Tecnologias & Internet</center>
+        </h1>
+        <br>
+    </div>
+    <br>
+    <br>
+    <div id="containerForm" class="container-sm">
+        <form id="editForm" onsubmit="return changePassword();">
+            <div class="row">
+                <div class="col-sm">
+                    <label for="pwd1">Nueva Contrasea: </label>
+                </div>
+                <div class="col-sm">
+                    <label for="pwd2">Repita la contraseña: </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <input id="pwd1" class="form-control" type="password" placeholder="Contraseña" required>
+                </div>
+                <div class="col-sm">
+                    <input id="pwd2" class="form-control" type="password" placeholder="Repita la Contraseña" required>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-outline-success">Cambiar Contraseña</button>
+        </form>
+        <br>
+    </div>
+    </div>
+</body>
+
+</html>
