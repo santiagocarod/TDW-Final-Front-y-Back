@@ -484,9 +484,19 @@ function loadData() {
     const code = urlParams.get('id');
     var item = searchItemId(code);
 
+    var str = spliceId(code);
+
+    var type = str[0];
+
+    if (type == "entity") {
+        inside = "entities";
+    } else {
+        inside = type + "s";
+    }
+
     var type = document.getElementById("type");
-    type.value = code[0];
-    //type.setAttribute("disabled", "true")
+    type.value = inside;
+    type.setAttribute("disabled","true");
 
     var name = document.getElementById("name");
     name.value = item.name;
@@ -503,7 +513,31 @@ function loadData() {
     var wiki = document.getElementById("wikiUrl");
     wiki.value = item.wikiUrl;
 
+}
 
+function loadRelationData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('id');
+    var item = searchItemId(code);
+
+    var selected = document.getElementById("type").value;
+
+    types = ["persons", "entities", "products"];
+
+    const index = types.indexOf(selected);
+    if (index > -1) {
+        types.splice(index, 1);
+    }
+
+    for (i of types) {
+        if (item[i] != null) {
+            for (j of item[i]) {
+                var relation = document.getElementById(i + j);
+                relation.checked = true;
+
+            }
+        }
+    }
 }
 
 function edit() {
@@ -530,7 +564,7 @@ function edit() {
     item.wikiUrl = document.getElementById("wikiUrl").value;
 
     content = JSON.stringify(item);
-    console.log(content);
+
     $.ajax({
         type: "PUT",
         url: '/api/v1/' + type + 's/' + id,
@@ -540,13 +574,84 @@ function edit() {
         contentType: 'application/json',
         data: content,
         dataType: 'json',
+        async: false,
         success: function (data) {
-
+            changeRelations(code);
         }
     });
 
     location = "reader.html";
     return false;
+}
+
+function changeRelations(code){
+    var str = spliceId(code);
+    var type = str[0];
+    var id = str[1];
+    var existing_relations = getExistingRelations(type,id);
+    var new_relations = getNewRelations();
+
+    var remove = existing_relations.filter(x =>!new_relations.includes(x));
+    var add = new_relations.filter(x =>!existing_relations.includes(x));
+    
+    if (type == "entity"){
+        type = "entitie";
+    }
+    type = type +"s";
+
+    addRelations(id,add,type);
+    removeRelations(id,remove,type);
+}
+
+function getExistingRelations(type,id){
+    types = ["person", "entity", "product"];
+
+    const index = types.indexOf(type);
+    if (index > -1) {
+        types.splice(index, 1);
+    }
+    
+    if (type == "entity"){
+        goTo = "entitie";
+    }else{
+        goTo = type;
+    }
+    relationsId = [];
+    $.ajax({
+        type: "GET",
+        url: '/api/v1/' + goTo + "s/" + id,
+        headers: {
+            "Authorization": authHeader
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            for (i of types){
+                if (i == "entity"){
+                    i="entitie"
+                }
+                relations = data[type][i+"s"];
+                
+                for (j of relations){
+                    relationsId.push(i+"s"+j);
+                }
+                
+            }
+        }
+    });
+    return relationsId;
+    
+}
+
+function getNewRelations(){
+    var relations = document.getElementsByClassName("form-check-input");
+    relationsId = [];
+    for (r of relations){
+        if (r.checked){
+            relationsId.push(r.id);
+        }
+    }
+    return relationsId;
 }
 
 function saveNew() {
@@ -561,6 +666,15 @@ function saveNew() {
     newItem.imageUrl = document.getElementById("imageUrl").value;
     newItem.wikiUrl = document.getElementById("wikiUrl").value;
 
+    var relations = document.getElementsByClassName("form-check-input");
+    relationsID = [];
+    for (r of relations){
+        if (r.checked){
+            relationsID.push(r.id);
+        }
+    }
+
+    
     var type = document.getElementById("type").value;
 
 
@@ -576,12 +690,65 @@ function saveNew() {
         data: content,
         dataType: 'json',
         success: function (data) {
-
+            if(type =="persons"){
+                inside = "person";
+            }else{
+                if (type =="product"){
+                    inside = "product";
+                }else{
+                    inside = "entity";
+                }
+            }
+            addRelations(data[inside].id,relationsID,type);
         }
     });
 
     location = "reader.html"
     return true;
+}
+
+function addRelations(id,relations,type){
+    var authHeader = localStorage.getItem("authHeader");
+    
+    
+    for (r of relations){
+        var str = spliceId(r);
+        $.ajax({
+            type: "PUT",
+            url: '/api/v1/' + type+"/"+id+"/"+str[0]+"/add/"+str[1],
+            headers: {
+                "Authorization": authHeader
+            },
+            contentType: 'application/json',
+            data: content,
+            dataType: 'json',
+            success: function (data) {
+            }
+        });
+    }
+
+}
+
+function removeRelations(id,relations,type){
+    var authHeader = localStorage.getItem("authHeader");
+    
+    
+    for (r of relations){
+        var str = spliceId(r);
+        $.ajax({
+            type: "PUT",
+            url: '/api/v1/' + type+"/"+id+"/"+str[0]+"/rem/"+str[1],
+            headers: {
+                "Authorization": authHeader
+            },
+            contentType: 'application/json',
+            data: content,
+            dataType: 'json',
+            success: function (data) {
+            }
+        });
+    }
+
 }
 
 function getSelectedRelations() {
@@ -1038,9 +1205,12 @@ function login(id, authHeader) {
     localStorage.setItem('authHeader', authHeader);
 }
 
-function loadRelOptions(){
+function loadRelOptions() {
     var authHeader = localStorage.getItem("authHeader");
-    var div = document.getElementById("addRelations");
+    var div = document.getElementById("relation1");
+    div.innerHTML = "";
+    div = document.getElementById("relation2");
+    div.innerHTML = "";
 
     var selected = document.getElementById("type").value;
 
@@ -1050,23 +1220,65 @@ function loadRelOptions(){
     if (index > -1) {
         types.splice(index, 1);
     }
-
-    for (i of types){
+    cont = 1;
+    for (i of types) {
+        var div = document.getElementById("relation" + cont);
         $.ajax({
             type: "GET",
-            url: '/api/v1/'+i,
+            url: '/api/v1/' + i,
             headers: {
                 "Authorization": authHeader
             },
             dataType: 'json',
+            async: false,
             success: function (data) {
-                addOptions(data);
+                addOptions(data, i, div);
             }
         });
+        cont = cont + 1;
     }
 }
 
-function addOptions(data){
-    console.log(JSON.stringify(data));
+function addOptions(data, type, div) {
+    data = data[type];
+    if (type == "products") {
+        title = "Productos";
+        inside = "product";
+    } else {
+        if (type == "persons") {
+            title = "Personas";
+            inside = "person";
+        } else {
+            title = "Entidades";
+            inside = "entity";
+        }
+    }
+
+
+    var h4 = document.createElement("h4");
+    div.appendChild(h4);
+    h4.innerHTML = title;
+
+    for (item of data) {
+        item = item[inside];
+        var input = document.createElement("input");
+        div.appendChild(input);
+
+        input.setAttribute("class", "form-check-input");
+        input.setAttribute("type", "checkbox");
+        input.setAttribute("value", type + item.id);
+        input.setAttribute("id", type + item.id);
+
+
+        var label = document.createElement("label");
+        div.appendChild(label);
+        label.setAttribute("class", "form-check-label");
+        label.setAttribute("for", type + item.id);
+        label.innerHTML = item.name;
+
+        var br = document.createElement("br");
+        div.appendChild(br);
+    }
+
 
 }

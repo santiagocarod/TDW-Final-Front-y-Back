@@ -16,7 +16,7 @@
     <script src="static/code.js"></script>
 </head>
 
-<body onload="printUser();validate();loadData();loadRelOptions();">
+<body onload="printUser();validate();loadData();loadRelOptions();loadRelationData();">
     <div id="title" class="container-sm">
         <h1>
             <center>Tecnologias & Internet</center>
@@ -44,10 +44,10 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <select id="type" class="custom-select custom-select" onchange="loadRelOptions();">
-                            <option class="dropdown-item" value="p">Persona</option>
-                            <option class="dropdown-item" value="e">Entidad</option>
-                            <option class="dropdown-item" value="r">Producto</option>
+                        <select id="type" class="custom-select custom-select" onchange="loadRelOptions();loadRelationData();">
+                            <option class="dropdown-item" value="persons">Persona</option>
+                            <option class="dropdown-item" value="entities">Entidad</option>
+                            <option class="dropdown-item" value="products">Producto</option>
                         </select>
                     </div>
                     <div class="col-sm">
@@ -79,7 +79,12 @@
                 </div>
                 <br>
                 <br>
-                <div id="addRelations"></div>
+                <h3>Relaciones</h3>
+                <br>
+                <div id="addRelations" class="row">
+                    <div class="col-sm" id="relation1"></div>
+                    <div class="col-sm" id="relation2"></div>
+                </div>
             </div>
             <button type="submit" class="btn btn-outline-success">Guardar</button>
         </form>
