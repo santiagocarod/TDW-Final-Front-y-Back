@@ -119,4 +119,22 @@ INSERT INTO `person_participates_entity` (`entity_id`, `person_id`) VALUES
 ```
 ### Interfaz Gráfica:
 #### Lector
+   * La página principal de un lector es la siguiente:
+   ![](./imagenes/lector.png)
+
+   * Para acceder al perfil se hace Click en el boton de perfil al lado del mensaje de bienvenida con el nombre de usuario (aqui puede editar su información y cambiar su contraseña):
+   ![](./imagenes/perfil_lector.png)
+
+   * Para ver un elemento se hace click sobre el elemento que sobre el cual se quiera ver su información
+   ![](./imagenes/elemento.png)
+
 #### Escritor
+Cómo escritor puede hacer las cosas del lector y además puede:
+   * Ver el menu de edicion de los elementos:
+   ![](./imagenes/escritor.png)
+   * Editar un elemento en especifico:
+   ![](./imagenes/editar.png)
+   * Agregar un nuevo elemento (Desde el botón verde en la parte inferior del menú principal):
+   ![](./imagenes/nuevo.png)
+   * Y además editar los permisos y estados de los usuarios (Desde el botón azúl en la parte inferior del menú principal): 
+   ![](./imagenes/usuarios.png)
