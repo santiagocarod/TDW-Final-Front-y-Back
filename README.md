@@ -2,28 +2,7 @@
 *Por: Santiago Caro Duque* ***(BQ0550)***
 
 ## Que se hizo
-Lo primero que se realizo para poder desarrollar esta practica fue entender a fondo y comprender como funcionaba el codigo entregado por parte de los profesores. Para esto primero se uso la clase realizada por Teams en donde se explicó el funcionamiento básico de la aplicacion y se explicó ademas todo lo que ya estaba implementado y los pasos necesarios para poder desplegarlo. 
-
-Una vez desplegado el servicio básico, se procedió a revisar el código que ya estaba hecho hasta lograr entender cual era su funcionamiento y por que era necesario y en algunos casos cambiarlo para entender que consecuencias tendria al momento de ejecutar la aplicación.
-
-Además, también se corrieron las pruebas que ya estaban definidas en el archivo de pruebas y se verifico cuales eran las que fallaban, en este momento se fijo cual era el objetivo con respecto a la práctica, realizar la implementación del Backend con PHP y su framework slim de la parte de Personas y Entidades.
-
-El trabajo realizado para completar esta practica se dividio en dos tareas principales las cuales cada una tambien se dividieron en dos sub tareas creando asi entonces un esquema de la siguiente manera:
-
-1. Terminar la especificación de la API que ya venia implementada
-    * Terminar la API para las personas (persons)
-    * Terminar la API para las entidades (entities)
-1. Agregar el comportamiento dentro de los controladores para que realicen el comportamiento debido
-    * Agregar el comportamiento para el control de las personas (persons)
-    * Agregar el comportamiento para el control de las entidades (entities)
-
-La tarea numero 1 se realizó para poder verificar que el trabajo realizado para la tarea numero 2 sea correcta. Asi se tiene un segundo marco de pruebas además del muy completo marco de pruebas ya entregado de manera previa. 
-
-Asi entonces se empezó el desarrollo de la practica intentando realizar la mayor cantidad de verificaciones posibles y pruebas a los componentes que se estaban implementando. 
-
-El resultado fue muy satisfactorio y por lo tanto se termino con todo el set de pruebas completamente aprobado como se puede verificar en la siguiente imagen.
-
-![ResultadosPruebas](resultadosPruebas.png)
+**Ver [Memoria_TDW_Final.pdf](Memoria_TDW_Final.pdf)**
 
 ## Despliegue
 
@@ -50,13 +29,15 @@ Para el despliegue de la aplicacion se tendrán que seguir los siguientes pasos:
     * ```
         $ bin/doctrine orm:validate
         ```
-1. Por ultimo para ejecutar el servidor con la interfaz de *swagger ui* ejecutar el siguiente comando:
+1. Para ejecutar el servidor ejecutar el siguiente comando:
     * ```
         $ php -S 127.0.0.1:8000 -d display_errors=1 -t public 
         ```
     * Y conectarse por medio desde su navegador preferido a: http://127.0.0.1:8000
     * Iniciar sesión con las credenciales por defecto.
-
+      - adminUser : *adminUser*
+1. Para ir a la especificacion de la API:
+   * http://127.0.0.1:8000/api-docs/index.html
 ## Para ejecutar las pruebas:
 
 1.  Desde donde lo considere mas fácil (se Recomienda phpmyadmin) crear una nueva base de datos vacia con el nombre que prefiera (Pero tiene que ser diferente a la creada anteriormente)
@@ -136,3 +117,6 @@ INSERT INTO `person_participates_entity` (`entity_id`, `person_id`) VALUES
 (4, 3),
 (5, 3);
 ```
+### Interfaz Gráfica:
+#### Lector
+#### Escritor
