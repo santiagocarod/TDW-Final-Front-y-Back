@@ -35,7 +35,7 @@ Para el despliegue de la aplicacion se tendrán que seguir los siguientes pasos:
         ```
     * Y conectarse por medio desde su navegador preferido a: http://127.0.0.1:8000
     * Iniciar sesión con las credenciales por defecto.
-      - adminUser : *adminUser*
+      - adminUser : \*adminUser\*
 1. Para ir a la especificacion de la API:
    * http://127.0.0.1:8000/api-docs/index.html
 ## Para ejecutar las pruebas:
