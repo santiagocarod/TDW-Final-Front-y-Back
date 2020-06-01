@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 01, 2020 at 01:49 AM
+-- Generation Time: Jun 01, 2020 at 02:54 PM
 -- Server version: 10.4.13-MariaDB-1:10.4.13+maria~eoan-log
 -- PHP Version: 7.4.6
 
@@ -43,12 +43,11 @@ CREATE TABLE `entity` (
 --
 
 INSERT INTO `entity` (`id`, `name`, `birthdate`, `deathdate`, `image_url`, `wiki_url`) VALUES
-(1, 'World Wide Web Consortium', '1994-10-01 18:06:39', NULL, 'https://d2908q01vomqb2.cloudfront.net/ca3512f4dfa95a03169c5a670a4c91a19b3077b4/2018/10/18/w3c_logo-800x400.jpg', 'https://en.wikipedia.org/wiki/World_Wide_Web_Consortium'),
+(1, 'World Wide Web Consortium', '1994-10-01 00:00:00', NULL, 'https://d2908q01vomqb2.cloudfront.net/ca3512f4dfa95a03169c5a670a4c91a19b3077b4/2018/10/18/w3c_logo-800x400.jpg', 'https://en.wikipedia.org/wiki/World_Wide_Web_Consortium'),
 (2, 'Organización Europea para la investigación Nuclear', '1954-01-01 00:00:00', NULL, 'https://www.eso.org/public/archives/logos/screen/cern.jpg', 'https://en.wikipedia.org/wiki/CERN'),
 (3, 'Free Software Fundation', '1985-10-04 00:00:00', NULL, 'https://pbs.twimg.com/profile_images/471735621946314752/imENUbEK_400x400.png', 'https://en.wikipedia.org/wiki/Free_Software_Foundation'),
 (4, 'Netscape', '1994-04-04 00:00:00', NULL, 'https://findicons.com/files/icons/1765/windows_icons_v2/256/netscape.png', 'https://en.wikipedia.org/wiki/Netscape'),
-(5, 'Unicode Consortium', '1991-01-03 18:08:07', NULL, 'https://home.unicode.org/wp-content/uploads/2019/12/Unicode-Logo-Final-Blue-95x112.jpg', 'https://en.wikipedia.org/wiki/Unicode_Consortium'),
-(6, 'asdf', '1961-06-05 18:09:22', NULL, '', '');
+(5, 'Unicode Consortium', '1991-01-03 00:00:00', NULL, 'https://home.unicode.org/wp-content/uploads/2019/12/Unicode-Logo-Final-Blue-95x112.jpg', 'https://en.wikipedia.org/wiki/Unicode_Consortium');
 
 -- --------------------------------------------------------
 
@@ -71,8 +70,7 @@ INSERT INTO `entity_contributes_product` (`product_id`, `entity_id`) VALUES
 (2, 5),
 (3, 1),
 (3, 2),
-(4, 2),
-(4, 6),
+(4, 4),
 (5, 5);
 
 -- --------------------------------------------------------
@@ -95,11 +93,11 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`id`, `name`, `birthdate`, `deathdate`, `image_url`, `wiki_url`) VALUES
-(1, 'Brendan Eich', '1961-06-04 13:21:04', NULL, 'https://unchainedpodcast.com/wp-content/uploads/2020/01/Brendan-Eich.jpg', 'https://en.wikipedia.org/wiki/Brendan_Eich'),
+(1, 'Brendan Eich', '1961-06-04 00:00:00', NULL, 'https://unchainedpodcast.com/wp-content/uploads/2020/01/Brendan-Eich.jpg', 'https://en.wikipedia.org/wiki/Brendan_Eich'),
 (2, 'Linus Torvalds', '1969-12-28 00:00:00', NULL, 'https://www.channelfutures.com/files/2015/11/linus-torvalds-400x298_0-595x432.jpg', 'https://en.wikipedia.org/wiki/Linus_Torvalds'),
 (3, 'Mark Davis', '1952-09-13 00:00:00', NULL, 'https://api.time.com/wp-content/uploads/2016/03/mark-davis-unicode-img_27061-page-001.jpg', 'https://en.wikipedia.org/wiki/Mark_Davis_(Unicode)'),
 (4, 'Tim Berners-Lee', '1955-06-08 00:00:00', NULL, 'https://s2.latercera.com/wp-content/uploads/2018/12/Tim.jpg', 'https://en.wikipedia.org/wiki/Tim_Berners-Lee'),
-(5, 'Richard Stallman', '1953-03-18 18:08:36', NULL, 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7x0V2_5oVEfi3gW6P8PhAxkdXZMJKK-Qo-xRoKuB6Xb_K5fuE', 'https://en.wikipedia.org/wiki/Richard_Stallman');
+(5, 'Richard Stallman', '1953-03-16 00:00:00', NULL, 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7x0V2_5oVEfi3gW6P8PhAxkdXZMJKK-Qo-xRoKuB6Xb_K5fuE', 'https://en.wikipedia.org/wiki/Richard_Stallman');
 
 -- --------------------------------------------------------
 
@@ -120,13 +118,9 @@ INSERT INTO `person_contributes_product` (`product_id`, `person_id`) VALUES
 (1, 2),
 (1, 5),
 (2, 4),
-(2, 5),
 (3, 4),
-(3, 5),
-(4, 4),
-(4, 5),
-(5, 3),
-(5, 5);
+(4, 3),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -149,9 +143,7 @@ INSERT INTO `person_participates_entity` (`entity_id`, `person_id`) VALUES
 (3, 2),
 (3, 5),
 (4, 3),
-(5, 3),
-(5, 5),
-(6, 4);
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -176,7 +168,7 @@ INSERT INTO `product` (`id`, `name`, `birthdate`, `deathdate`, `image_url`, `wik
 (1, 'GNU / Linux', '1991-09-17 00:00:00', NULL, 'https://www.wallpaperflare.com/static/893/596/940/tux-linux-foxyriot-logo-wallpaper.jpg', 'https://en.wikipedia.org/wiki/Linux'),
 (2, 'DOM', '1998-10-01 00:00:00', NULL, 'https://www-archive.mozilla.org/docs/dom/technote/whitespace/whitespace_tree.png', 'https://en.wikipedia.org/wiki/Document_Object_Model'),
 (3, 'HTML', '1993-01-01 00:00:00', NULL, 'https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_960_720.png', 'https://en.wikipedia.org/wiki/HTML'),
-(4, 'JavaScript', '1995-12-04 18:08:16', NULL, 'https://logodix.com/logo/374740.png', 'https://en.wikipedia.org/wiki/Javascript'),
+(4, 'JavaScript', '1995-12-04 00:00:00', NULL, 'https://logodix.com/logo/374740.png', 'https://en.wikipedia.org/wiki/Javascript'),
 (5, 'Extensible Markup Language', '1998-01-01 00:00:00', NULL, 'https://png.pngtree.com/png-vector/20190302/ourlarge/pngtree-vector-xml-icon-png-image_719914.jpg', 'https://en.wikipedia.org/wiki/XML');
 
 -- --------------------------------------------------------
@@ -203,9 +195,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `role`, `status`, `birthdate`, `approved`) VALUES
 (1, 'adminUser', 'adminUser@example.com', '$2y$10$uFFsHUhIR4aqyr.WyJ.2Tu1emSgsdzvUk41uWI0kOnkAudqukEFp.', 'O:24:\"TDW\\ACiencia\\Entity\\Role\":1:{s:30:\"\0TDW\\ACiencia\\Entity\\Role\0role\";i:1;}', 1, NULL, 1),
 (9, 'a', 'a@b.c', '$2y$10$ugXFQlCq9EC.ashzbxffDuCcxAOmiBI1WtYC1xtAXksSHuQrymshq', 'O:24:\"TDW\\ACiencia\\Entity\\Role\":1:{s:30:\"\0TDW\\ACiencia\\Entity\\Role\0role\";i:1;}', 1, '0012-12-12 00:50:49', 1),
-(10, 'b', 'b@c.d', '$2y$10$n51IZ4K7ARnY4OYbRTChPuoEhHyDTGbtZMgsWjfWtqZD5Lu1MRkhe', 'O:24:\"TDW\\ACiencia\\Entity\\Role\":1:{s:30:\"\0TDW\\ACiencia\\Entity\\Role\0role\";i:0;}', 1, NULL, 1),
-(54, 'd', 'd', '$2y$10$sA0E4XoA.kubZODmPJH5UOxszfBro156PJtcUm02Yqi7jEHelL/Tm', 'O:24:\"TDW\\ACiencia\\Entity\\Role\":1:{s:30:\"\0TDW\\ACiencia\\Entity\\Role\0role\";i:1;}', 1, NULL, 1),
-(55, 'g', 'g', '$2y$10$Jr6kkeNLNIyndfC4mQ85Lu7jwDVWBT/ywEhN2ZKiTitE/4.43QBKO', 'O:24:\"TDW\\ACiencia\\Entity\\Role\":1:{s:30:\"\0TDW\\ACiencia\\Entity\\Role\0role\";i:0;}', 1, NULL, 0);
+(10, 'b', 'b@c.d', '$2y$10$n51IZ4K7ARnY4OYbRTChPuoEhHyDTGbtZMgsWjfWtqZD5Lu1MRkhe', 'O:24:\"TDW\\ACiencia\\Entity\\Role\":1:{s:30:\"\0TDW\\ACiencia\\Entity\\Role\0role\";i:0;}', 1, '1992-12-20 14:36:41', 1);
 
 --
 -- Indexes for dumped tables
@@ -272,13 +262,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `entity`
 --
 ALTER TABLE `entity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product`
